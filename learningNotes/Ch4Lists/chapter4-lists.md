@@ -68,7 +68,7 @@ Method index() - finding value with index
 
 Adding values - append() and insert()
 - those are list methods only (not for strings, integers)
-- list.append(item) = adds new item afetr last index 
+- list.append(item) = adds new item after last index 
 - list.insert(index, item) = adds value at an index moving forward all other items from that index further
 
 Removing with remove()
