@@ -2,7 +2,7 @@
 from random import choice
 import sys
 
-score = {'tie': 0, 'loss': 0, 'win': 0, 'total': 0}
+stats = {'tie': 0, 'loss': 0, 'win': 0, 'total': 0}
 rock = 'rock'
 paper = 'paper'
 scissors = 'scissors'
@@ -35,30 +35,30 @@ def showScore(score):
 
 if __name__ == '__main__':
     print("Welcome to (R)ock, (P)aper, (S)cissors. You will try your luck against powerful AI. Let's play!")
-    while True:
-        human_choice = input('To play press R for rock, P for paper, S for scissors or F to finish the '
-                             'game. \n')
-        if human_choice == 'F':
-            if score['total'] != 0:
-                print('End of the game. This is how you played:')
-                showScore(score)
-            else:
-                print('''So you don't want to play at all, huh?''')
-            sys.exit()
-
-        ai_choice = choice(list(choices.keys()))
-        print("AI shows " + ai_choice)
-
-        if human_choice not in choices:
-            print('''Seems you pressed wrong key. Let's try again.\n''')
-            continue
-        elif human_choice == ai_choice:
-            print('Tie.\n')
-            score['tie'] += 1
-            score['total'] += 1
-            showScore(score)
-            continue
+while True:
+    human_choice = input('To play press R for rock, P for paper, S for scissors or F to finish the '
+                         'game. \n')
+    if human_choice == 'F':
+        if stats['total'] == 0:
+            print('''So you don't want to play at all, huh?''')
         else:
-            score = whoWon(ai_choice, human_choice, score)
-            showScore(score)
-            continue
+            print('End of the game. This is how you played:')
+            showScore(stats)
+        sys.exit()
+
+    ai_choice = choice(list(choices.keys()))
+    print("AI shows " + ai_choice)
+
+    if human_choice not in choices:
+        print('''Seems you pressed wrong key. Let's try again.\n''')
+        continue
+    elif human_choice == ai_choice:
+        print('Tie.\n')
+        stats['tie'] += 1
+        stats['total'] += 1
+        showScore(stats)
+        continue
+    else:
+        stats = whoWon(ai_choice, human_choice, stats)
+        showScore(stats)
+        continue
