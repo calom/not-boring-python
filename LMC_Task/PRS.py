@@ -1,8 +1,7 @@
 # paper, rock, scissors
-import random, sys
-import numpy as np
+from random import choice
+import sys
 
-clue = "To play you should press R for rock, P for paper, S for scissors or F to finish the game."
 score = {'tie': 0, 'loss': 0, 'win': 0, 'total': 0}
 rock = 'rock'
 paper = 'paper'
@@ -37,7 +36,8 @@ def showScore(score):
 if __name__ == '__main__':
     print("Welcome to (R)ock, (P)aper, (S)cissors. You will try your luck against powerful AI. Let's play!")
     while True:
-        human_choice = input(clue + '\n')
+        human_choice = input('To play you should press R for rock, P for paper, S for scissors or F to finish the '
+                             'game. \n')
 
         if human_choice == 'F':
             if score['total'] != 0:
@@ -47,7 +47,7 @@ if __name__ == '__main__':
                 print('''So you don't want to play at all, huh?''')
             sys.exit()
 
-        ai_choice = random.choice(list(choices.keys()))
+        ai_choice = choice(list(choices.keys()))
         print("AI shows " + ai_choice)
 
         if human_choice not in choices:
