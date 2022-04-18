@@ -2,7 +2,6 @@
 import random, sys
 import numpy as np
 
-print("Welcome to (R)ock, (P)aper, (S)cissors. You will try your luck against powerful AI. Let's play!")
 clue = "To play you should press R for rock, P for paper, S for scissors or F to finish the game."
 score = {'tie': 0, 'loss': 0, 'win': 0, 'total': 0}
 rock = 'rock'
@@ -35,30 +34,32 @@ def showScore(score):
         tie: {score['tie']}""")
 
 
-while True:
-    human_choice = input(clue + '\n')
+if __name__ == '__main__':
+    print("Welcome to (R)ock, (P)aper, (S)cissors. You will try your luck against powerful AI. Let's play!")
+    while True:
+        human_choice = input(clue + '\n')
 
-    if human_choice == 'F':
-        if score['total'] != 0:
-            print('End of the game. This is how you played:')
+        if human_choice == 'F':
+            if score['total'] != 0:
+                print('End of the game. This is how you played:')
+                showScore(score)
+            else:
+                print('''So you don't want to play at all, huh?''')
+            sys.exit()
+
+        ai_choice = random.choice(list(choices.keys()))
+        print("AI shows " + ai_choice)
+
+        if human_choice not in choices:
+            print('''Seems you pressed wrong key. Let's try again.''')
+            continue
+        elif human_choice == ai_choice:
+            print('Tie.')
+            score['tie'] += 1
+            score['total'] += 1
             showScore(score)
+            continue
         else:
-            print('''So you don't want to play at all, huh?''')
-        sys.exit()
-
-    ai_choice = random.choice(list(choices.keys()))
-    print("I choose " + ai_choice)
-
-    if human_choice not in choices:
-        print('Seems you pressed wrong key.')
-        continue
-    elif human_choice == ai_choice:
-        print('Tie, again?')
-        score['tie'] += 1
-        score['total'] += 1
-        showScore(score)
-        continue
-    else:
-        score = whoWon(ai_choice, human_choice, score)
-        showScore(score)
-        continue
+            score = whoWon(ai_choice, human_choice, score)
+            showScore(score)
+            continue
