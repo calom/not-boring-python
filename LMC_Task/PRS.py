@@ -35,30 +35,30 @@ def showScore(score):
 
 if __name__ == '__main__':
     print("Welcome to (R)ock, (P)aper, (S)cissors. You will try your luck against powerful AI. Let's play!")
-while True:
-    human_choice = input('To play press R for rock, P for paper, S for scissors or F to finish the '
-                         'game. \n')
-    if human_choice == 'F':
-        if stats['total'] == 0:
-            print('''So you don't want to play at all, huh?''')
-        else:
-            print('End of the game. This is how you played:')
+    while True:
+        human_choice = input('To play press R for rock, P for paper, S for scissors or F to finish the '
+                             'game. \n')
+        if human_choice == 'F':
+            if stats['total'] == 0:
+                print('''So you don't want to play at all, huh?''')
+            else:
+                print('End of the game. This is how you played:')
+                showScore(stats)
+            sys.exit()
+
+        ai_choice = choice(list(choices.keys()))
+        print("AI shows " + ai_choice)
+
+        if human_choice not in choices:
+            print('''Seems you pressed wrong key. Let's try again.\n''')
+            continue
+        elif human_choice == ai_choice:
+            print('Tie.\n')
+            stats['tie'] += 1
+            stats['total'] += 1
             showScore(stats)
-        sys.exit()
-
-    ai_choice = choice(list(choices.keys()))
-    print("AI shows " + ai_choice)
-
-    if human_choice not in choices:
-        print('''Seems you pressed wrong key. Let's try again.\n''')
-        continue
-    elif human_choice == ai_choice:
-        print('Tie.\n')
-        stats['tie'] += 1
-        stats['total'] += 1
-        showScore(stats)
-        continue
-    else:
-        stats = whoWon(ai_choice, human_choice, stats)
-        showScore(stats)
-        continue
+            continue
+        else:
+            stats = whoWon(ai_choice, human_choice, stats)
+            showScore(stats)
+            continue
